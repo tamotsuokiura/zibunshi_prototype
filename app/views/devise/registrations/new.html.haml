@@ -1,0 +1,21 @@
+- content_for :css do
+  = stylesheet_link_tag 'organizations'
+  
+.Sign-header
+  = image_tag "logo-resized.png"
+.Sign-form
+  .Sign-form__Box
+    .Sign-form__Box__Header
+      %p.Sign-form__Box__Header--title 新規団体登録
+      = link_to masters_path do
+        = icon('far', 'times-circle', class: "Sign-form__Box__Header--icon", id: 'close-button')
+    -# - if @organization.errors.any?
+    -#   - @organization.errors.full_messages.each do |message|
+    -#     = message
+    -# test
+    = form_with model: @organization, url: organization_registration_path, id: 'new_organization', class: 'new_organization', local: true do |f|
+      = f.text_field :name, placeholder: "施設名", class: "form-field"
+      = f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "form-field"
+      = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）", class: "form-field"
+      = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード", class: "form-field"
+      = f.submit "新規団体登録", class: "yellow-button"

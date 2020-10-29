@@ -1,0 +1,26 @@
+- content_for :css do
+  = stylesheet_link_tag 'users'
+
+.Header
+  .Header__Left
+    =image_tag("logo.png", class: "logo")
+  .Header__Right
+    = icon('fas', 'cog', class: "Header__Right--icon")
+
+.User-list
+  %h1.User-list__Title 利用者一覧
+  .User-list__Container
+    - @users.each do |user|
+      .User-list__Container__Box
+        = link_to "#", class: "User-list__Container__Box__Left" do
+          = image_tag(user.image, class: "User-list__Container__Box__Left--icon")
+          .User-list__Container__Box__Left--info
+            .User-list__Container__Box__Left--info--name
+              %p= user.name
+            .User-list__Container__Box__Left--info--birth
+              %p= user.birth.strftime("%Y年%m月%d日生まれ")
+        = link_to "#", class: "User-list__Container__Box__Right" do
+          %p 編集
+.Footer-button
+  .Footer-button__Button
+    = link_to "利用者登録", new_user_path, class: "button-blue"

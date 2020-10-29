@@ -1,0 +1,23 @@
+.Content{
+  max-width: 500px;
+  width: 80%;
+  margin: 0 auto;
+}
+.Form-Container{
+  margin-top: 50px;
+  &__Image{
+    margin-bottom: 20px;
+  }
+  &__Name{
+    margin-bottom: 16px;
+  }
+  &__Date{
+    margin-bottom: 30px;
+    &--title{
+      margin-left: 2px;
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+  }
+
+}

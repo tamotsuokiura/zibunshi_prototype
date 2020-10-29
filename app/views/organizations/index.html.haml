@@ -1,0 +1,39 @@
+- content_for :css do
+  = stylesheet_link_tag 'organizations'
+
+- if organization_signed_in?
+  .Header
+    .Header__Left
+      =image_tag("logo.png", class: "logo")
+    .Header__Right
+      = icon('fas', 'cog', class: "Header__Right--icon")
+  .User-list
+    - if @users.present?
+      %h1.User-list__Title 利用者一覧
+      .User-list__Container
+        - @users.each do |user|
+          .User-list__Container__Box
+            = link_to "#", class: "User-list__Container__Box__Left" do
+              = image_tag(user.image, class: "User-list__Container__Box__Left--icon")
+              .User-list__Container__Box__Left--info
+                .User-list__Container__Box__Left--info--name
+                  %p= user.name
+                .User-list__Container__Box__Left--info--birth
+                  %p= user.birth.strftime("%Y年%m月%d日生まれ")
+            = link_to "#", class: "User-list__Container__Box__Right" do
+              %p 編集
+    - else
+      .User-list__Message
+        %p.User-list__Message--text 利用者を登録してください
+        = icon('fas', 'arrow-down', class: "User-list__Message--arrow")
+  .Footer-button
+    .Footer-button__Button
+      = link_to "利用者登録", new_user_path, class: "button-blue"
+- else
+  .Welcome
+    .Welcome__Top
+      = image_tag("logo.png", class: "Welcome__Top--logo")
+      %p.Welcome__Top--text
+        施設のアカウントを作成し
+        %br
+        利用者様のヒストリーを作っていきましょう
