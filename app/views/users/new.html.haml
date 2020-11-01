@@ -1,5 +1,11 @@
 - content_for :css do
   = stylesheet_link_tag 'users'
+.header
+  .header__Left
+    = link_to root_path do
+      =image_tag("logo.png", class: "logo")
+  .header__Right
+    = icon('fas', 'cog', class: "header__Right--icon")
 .Content
   .Form-Container
     = form_with model: @user, local: true do |f|

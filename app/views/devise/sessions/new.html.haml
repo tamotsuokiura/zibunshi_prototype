@@ -1,0 +1,19 @@
+- content_for :css do
+  = stylesheet_link_tag 'organizations'
+  
+.header
+  .header__Left
+    = link_to root_path do
+      =image_tag("logo.png", class: "logo")
+  .header__Right
+
+.sign-form
+  %h1.sign-form__Title ログインフォーム
+  .sign-form__Container
+    = form_with model: @organization, url: organization_session_path, id: 'new_organization', class: 'new_organization', local: true do |f|
+      .sign-form__Container__Box
+        = f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "text-form"
+      .sign-form__Container__Box
+        = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "text-form"
+      .sign-form__Container__Submit
+        = f.submit "ログイン", class: "button-blue"

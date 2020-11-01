@@ -28,6 +28,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:image, :name, :birth)
+    params.require(:user).permit(:image, :name, :birth).merge(organization_id: current_organization.id)
   end
 end

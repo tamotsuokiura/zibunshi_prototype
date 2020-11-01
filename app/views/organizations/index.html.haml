@@ -2,11 +2,28 @@
   = stylesheet_link_tag 'organizations'
 
 - if organization_signed_in?
-  .Header
-    .Header__Left
+  .header
+    .header__Left
       =image_tag("logo.png", class: "logo")
-    .Header__Right
-      = icon('fas', 'cog', class: "Header__Right--icon")
+    .header__Right
+      = label_tag :check1 do
+        = icon('fas', 'cog', class: "header__Right--icon", id: "modal-open")
+      = check_box_tag :check1
+      -# モーダル
+      .modal
+        = label_tag :check1 do
+          = icon('fas', 'times-circle', class: "modal--x")
+        .modal__Container
+          .modal__Container__Box
+            = icon('fas', 'edit', class: "modal__Container__Box--icon")
+            =link_to "利用者情報の編集", "#", class: "modal__Container__Box--text"
+          .modal__Container__Box
+            = icon('fas', 'times', class: "modal__Container__Box--icon")
+            =link_to "利用者の削除", "#", class: "modal__Container__Box--text"
+          .modal__Container__Box
+            = icon('fas', 'sign-out-alt', class: "modal__Container__Box--icon")
+            =link_to "ログアウト", "/organizations/sign_out", method: :delete, class: "modal__Container__Box--text"
+      = label_tag :check1, "", id: "modal-overlay"
   .User-list
     - if @users.present?
       %h1.User-list__Title 利用者一覧
@@ -25,7 +42,7 @@
     - else
       .User-list__Message
         %p.User-list__Message--text 利用者を登録してください
-        = icon('fas', 'arrow-down', class: "User-list__Message--arrow")
+        
   .Footer-button
     .Footer-button__Button
       = link_to "利用者登録", new_user_path, class: "button-blue"
@@ -33,7 +50,14 @@
   .Welcome
     .Welcome__Top
       = image_tag("logo.png", class: "Welcome__Top--logo")
-      %p.Welcome__Top--text
-        施設のアカウントを作成し
-        %br
-        利用者様のヒストリーを作っていきましょう
+      -# %p.Welcome__Top--text
+      -#   施設のアカウントを作成し
+      -#   %br
+      -#   利用者のヒストリーを作っていきましょう
+    .Welcome__Sign
+      .Welcome__Sign__Up
+        = link_to "新規登録", new_organization_registration_path, class: "button-yellow"
+      .Welcome__Sign__In
+        = link_to "ログイン", new_organization_session_path, class: "button-blue"
+
+
